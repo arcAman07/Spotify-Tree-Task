@@ -33,5 +33,8 @@ for i in range(0, len(L)):
         album_uri = album_details["items"][i]["uri"]
         track_details = sp.album_tracks(album_uri)
         total_tracks = len(track_details["items"])
-        print(total_tracks)
-        # for j in range(0,)
+        for j in range(0,total_tracks):
+            track_name = track_details["items"][j]["name"]
+            track_uri = track_details["items"][j]["uri"]
+            print(track_name)
+            print("\n")

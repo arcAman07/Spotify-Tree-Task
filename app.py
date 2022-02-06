@@ -25,8 +25,8 @@ for i in range(0, len(L)):
         "spotify"
     ]
     artist_id = artist_url[32:]
-    album_details = sp.artist_albums(artist_id, album_type="album", limit=2)
-    print(len(album_details["items"]))
-    for i in range(2):
+    album_details = sp.artist_albums(artist_id, album_type="album")
+    total_albums = len(album_details["items"])
+    for i in range(total_albums):
         album_name = album_details["items"][i]["name"]
         print(album_name)

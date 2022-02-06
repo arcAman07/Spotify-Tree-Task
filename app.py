@@ -1,6 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import json
+import os
 import sys
 from dotenv import load_dotenv
 
@@ -13,10 +14,6 @@ for i in range(1, n):
 print(L)
 sp = spotipy.Spotify(
     auth_manager=SpotifyClientCredentials(
-        client_id="YOUR_APP_CLIENT_ID", client_secret="YOUR_APP_CLIENT_SECRET"
+        client_id=os.getenv("CLIENT_ID"), client_secret=os.getenv("CLIENT_SECRET")
     )
 )
-print()
-results = sp.search(q="weezer", limit=20)
-for idx, track in enumerate(results["tracks"]["items"]):
-    print(idx, track["name"])

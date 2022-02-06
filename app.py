@@ -21,7 +21,10 @@ sp = spotipy.Spotify(
 for i in range(0, len(L)):
     artistName = L[i]
     results = sp.search(q=artistName)
-    artist_url = results["tracks"]["items"][0]["album"]["artists"][0]["external_urls"]["spotify"]
+    artist_url = results["tracks"]["items"][0]["album"]["artists"][0]["external_urls"][
+        "spotify"
+    ]
     artist_id = artist_url[32:]
-    print(sp.artist_albums(artist_id))
-
+    album_details = sp.artist_albums(artist_id, album_type="album", limit=2)
+    album_name = album_details["items"]
+    print(album_details)

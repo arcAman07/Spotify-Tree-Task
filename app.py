@@ -17,3 +17,11 @@ sp = spotipy.Spotify(
         client_id=os.getenv("CLIENT_ID"), client_secret=os.getenv("CLIENT_SECRET")
     )
 )
+
+for i in range(0, len(L)):
+    artistName = L[i]
+    results = sp.search(q=artistName)
+    artist_url = results["tracks"]["items"][0]["album"]["artists"][0]["external_urls"]["spotify"]
+    artist_id = artist_url[32:]
+    print(sp.artist_albums(artist_id))
+

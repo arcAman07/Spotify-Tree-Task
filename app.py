@@ -11,13 +11,11 @@ n = len(sys.argv)
 L = []
 for i in range(1, n):
     L.append(sys.argv[i])
-print(L)
 sp = spotipy.Spotify(
     auth_manager=SpotifyClientCredentials(
         client_id=os.getenv("CLIENT_ID"), client_secret=os.getenv("CLIENT_SECRET")
     )
 )
-print(L)
 for i in range(0, len(L)):
     artistName = L[i]
     main_Node = Node(artistName)
@@ -26,7 +24,6 @@ for i in range(0, len(L)):
         "spotify"
     ]
     artist_id = artist_url[32:]
-    print(artist_id)
     # We can add the limit to the number of it , should be displayed
     album_details = sp.artist_albums(artist_id, album_type="album")
     total_albums = len(album_details["items"])
@@ -40,5 +37,5 @@ for i in range(0, len(L)):
             track_name = track_details["items"][j]["name"]
             track_uri = track_details["items"][j]["uri"]
             third_Node = Node(track_name,parent=second_Node)
-    for pre, fill, node in RenderTree(udo):
-        print("%s%s" % (pre, node.name))
+    for pre, fill, node in RenderTree(main_Node):
+        print("%s%s" % (pre, node.name)+"\n")

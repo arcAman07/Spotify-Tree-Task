@@ -25,8 +25,13 @@ for i in range(0, len(L)):
         "spotify"
     ]
     artist_id = artist_url[32:]
+    # We can add the limit to the number of it , should be displayed
     album_details = sp.artist_albums(artist_id, album_type="album")
     total_albums = len(album_details["items"])
-    for i in range(total_albums):
+    for i in range(1):
         album_name = album_details["items"][i]["name"]
-        print(album_name)
+        album_uri = album_details["items"][i]["uri"]
+        track_details = sp.album_tracks(album_uri)
+        total_tracks = len(track_details["items"])
+        print(total_tracks)
+        # for j in range(0,)

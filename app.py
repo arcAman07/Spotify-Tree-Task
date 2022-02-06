@@ -24,18 +24,20 @@ for i in range(0, len(L)):
         "spotify"
     ]
     artist_id = artist_url[32:]
-    # We can add the limit to the number of it , should be displayed
+    # We can add the limit to the number of it , the albums should be displayed
     album_details = sp.artist_albums(artist_id, album_type="album")
     total_albums = len(album_details["items"])
-    for i in range(1):
+    for i in range(total_albums):
         album_name = album_details["items"][i]["name"]
         second_Node = Node(album_name,parent=main_Node)
         album_uri = album_details["items"][i]["uri"]
         track_details = sp.album_tracks(album_uri)
         total_tracks = len(track_details["items"])
+        # We can also decide upto how many tracks, should be displayed in an album
         for j in range(0,total_tracks):
             track_name = track_details["items"][j]["name"]
             track_uri = track_details["items"][j]["uri"]
             third_Node = Node(track_name,parent=second_Node)
     for pre, fill, node in RenderTree(main_Node):
         print("%s%s" % (pre, node.name)+"\n")
+# Need to add year maybe( didn't understand what was that )

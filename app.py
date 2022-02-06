@@ -5,6 +5,7 @@ import os
 import sys
 from dotenv import load_dotenv
 from anytree import Node, RenderTree
+
 load_dotenv()
 n = len(sys.argv)
 # 1st argument at index = 0 is app.py itself which is used to run the python script, so the artist names will start from index 1 to n-1
@@ -17,6 +18,8 @@ sp = spotipy.Spotify(
     )
 )
 for i in range(0, len(L)):
+    # Maybe , Displaying the release date when first album was dropped.
+    print("\n")
     artistName = L[i]
     main_Node = Node(artistName)
     results = sp.search(q=artistName)
@@ -29,15 +32,15 @@ for i in range(0, len(L)):
     total_albums = len(album_details["items"])
     for i in range(total_albums):
         album_name = album_details["items"][i]["name"]
-        second_Node = Node(album_name,parent=main_Node)
+        second_Node = Node(album_name, parent=main_Node)
         album_uri = album_details["items"][i]["uri"]
         track_details = sp.album_tracks(album_uri)
         total_tracks = len(track_details["items"])
         # We can also decide upto how many tracks, should be displayed in an album
-        for j in range(0,total_tracks):
+        for j in range(0, total_tracks):
             track_name = track_details["items"][j]["name"]
             track_uri = track_details["items"][j]["uri"]
-            third_Node = Node(track_name,parent=second_Node)
+            third_Node = Node(track_name, parent=second_Node)
     for pre, fill, node in RenderTree(main_Node):
-        print("%s%s" % (pre, node.name)+"\n")
+        print("%s%s" % (pre, node.name))
 # Need to add year maybe( didn't understand what was that )

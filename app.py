@@ -4,7 +4,7 @@ import json
 import os
 import sys
 from dotenv import load_dotenv
-
+from anytree import Node, RenderTree
 load_dotenv()
 n = len(sys.argv)
 # 1st argument at index = 0 is app.py itself which is used to run the python script, so the artist names will start from index 1 to n-1
@@ -17,7 +17,7 @@ sp = spotipy.Spotify(
         client_id=os.getenv("CLIENT_ID"), client_secret=os.getenv("CLIENT_SECRET")
     )
 )
-
+print(L)
 for i in range(0, len(L)):
     artistName = L[i]
     results = sp.search(q=artistName)
@@ -25,6 +25,7 @@ for i in range(0, len(L)):
         "spotify"
     ]
     artist_id = artist_url[32:]
+    print(artist_id)
     # We can add the limit to the number of it , should be displayed
     album_details = sp.artist_albums(artist_id, album_type="album")
     total_albums = len(album_details["items"])
@@ -37,4 +38,3 @@ for i in range(0, len(L)):
             track_name = track_details["items"][j]["name"]
             track_uri = track_details["items"][j]["uri"]
             print(track_name)
-            print("\n")

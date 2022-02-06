@@ -20,6 +20,7 @@ sp = spotipy.Spotify(
 print(L)
 for i in range(0, len(L)):
     artistName = L[i]
+    main_Node = Node(artistName)
     results = sp.search(q=artistName)
     artist_url = results["tracks"]["items"][0]["album"]["artists"][0]["external_urls"][
         "spotify"
@@ -31,10 +32,13 @@ for i in range(0, len(L)):
     total_albums = len(album_details["items"])
     for i in range(1):
         album_name = album_details["items"][i]["name"]
+        second_Node = Node(album_name,parent=main_Node)
         album_uri = album_details["items"][i]["uri"]
         track_details = sp.album_tracks(album_uri)
         total_tracks = len(track_details["items"])
         for j in range(0,total_tracks):
             track_name = track_details["items"][j]["name"]
             track_uri = track_details["items"][j]["uri"]
-            print(track_name)
+            third_Node = Node(track_name,parent=second_Node)
+    for pre, fill, node in RenderTree(udo):
+        print("%s%s" % (pre, node.name))

@@ -28,7 +28,7 @@ for i in range(0, len(L)):
     ]
     artist_id = artist_url[32:]
     # We can add the limit to the number of it , the albums should be displayed
-    album_details = sp.artist_albums(artist_id, album_type="album")
+    album_details = sp.artist_albums(artist_id, album_type="album",limit=2)
     total_albums = len(album_details["items"])
     for i in range(total_albums):
         album_name = album_details["items"][i]["name"]
